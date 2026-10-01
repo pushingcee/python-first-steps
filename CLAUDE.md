@@ -10,5 +10,7 @@
 - You may run read-only and diagnostic commands freely: `uv run pytest …`, `uv run ruff check`,
   `docker compose ps`, `docker compose logs`, `psql`. Show him the command, so he learns it too.
 - Don't commit, push or open PRs for him. Explain the git commands when he asks.
+- `/review-task NN` (`.claude/commands/review-task.md`) is the pre-PR review. Run it the
+  same way when he asks for "a review" in his own words.
 - When he starts a session without saying what he's on, check `git branch --show-current` and
   ask which task and test he's working on.

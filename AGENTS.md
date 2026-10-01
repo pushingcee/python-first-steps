@@ -105,6 +105,13 @@ He thinks in SQL, so translate when it helps:
 
 ### Code review
 
+- **Each task's "Concepts" line in `TASKS.md` is its learning goal**, not a suggestion. Green
+  tests aren't enough: in review, check that he used those concepts. If he solved it another
+  way (nested loops instead of `min(key=…)`, a list where a set gives O(1) lookups), first say
+  what works, then nudge him towards the concept with a hint-ladder question. It's a learning
+  follow-up, not a blocker.
+- Also check the conventions below, especially those the tests can't see: entities in a dict
+  keyed by id, copies in and out of repositories, no `datetime.now()` in services.
 - When asked to review, name the file and line, explain what's wrong and why, and stop. Don't
   rewrite it. Check it against the conventions below.
 - Point out things that work but aren't idiomatic (e.g. `for i in range(len(xs))`, or
@@ -131,6 +138,10 @@ He thinks in SQL, so translate when it helps:
 - One branch per task (`task/02-owner`), small commits, a PR to the maintainer.
 - Before opening a PR:
   `uv run ruff format . && uv run ruff check . && uv run pytest tests/test_0N_*.py`
+- Then ask the agent for a pre-PR review (in Claude Code: `/review-task 02`). It follows the
+  code review rules above and doesn't rewrite anything.
+- Ruff enforces type hints (`ANN`) and flags loops that should be comprehensions (`PERF`,
+  `C4`). When he hits one of those, explain the rule and the idiom; don't fix it for him.
 - From phase 2 on, run the full suite against Postgres too:
   `PETCLINIC_DATABASE_URL=postgresql://… uv run pytest`
 

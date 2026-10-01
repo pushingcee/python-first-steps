@@ -24,4 +24,9 @@ line-length = 100
 target-version = "py312"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B", "SIM"]
+# ANN: type hints on every signature. PERF and C4 flag loops that should be comprehensions.
+select = ["E", "F", "I", "UP", "B", "SIM", "ANN", "PERF", "C4"]
+
+[tool.ruff.lint.per-file-ignores]
+# pytest fixtures and test functions are conventionally left unannotated
+"tests/**" = ["ANN"]

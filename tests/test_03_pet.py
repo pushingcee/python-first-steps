@@ -66,6 +66,14 @@ def test_pet_names_are_unique_per_owner_case_insensitive(context, owner, other_o
     assert add_pet(context, other_owner.id, name="Leo").owner_id == other_owner.id
 
 
+def test_changes_are_not_stored_until_saved(context, owner):
+    pet = add_pet(context, owner.id)
+    pet.name = "Changed"
+
+    assert context.pet_service.get_pet(pet.id).name == "Leo"
+    assert [p.name for p in context.pet_service.pets_of_owner(owner.id)] == ["Leo"]
+
+
 def test_get_unknown_pet(context):
     with pytest.raises(NotFoundError):
         context.pet_service.get_pet(42)
