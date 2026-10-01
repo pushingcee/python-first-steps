@@ -1,0 +1,27 @@
+[project]
+name = "petclinic"
+version = "0.1.0"
+description = "Spring PetClinic, rebuilt as a Python CLI for learning"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+petclinic = "petclinic.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
