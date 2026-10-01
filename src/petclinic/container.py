@@ -1,7 +1,8 @@
 """Composition root: builds every object and wires dependencies through constructors.
 This is the Spring application context, written by hand."""
 
-from dataclasses import dataclass
+from collections.abc import Callable
+from dataclasses import dataclass, field
 
 from petclinic.clock import Clock, SystemClock
 from petclinic.repository.doctor_repository import InMemoryDoctorRepository
@@ -27,6 +28,13 @@ class ApplicationContext:
     pet_service: PetService
     visit_service: VisitService
     resources: list[Resource]
+    # Phase 2: register cleanup here, e.g. closing the database connection.
+    shutdown_hooks: list[Callable[[], None]] = field(default_factory=list)
+
+    def close(self) -> None:
+        """Run the shutdown hooks, newest first, like Spring closing its context."""
+        for hook in reversed(self.shutdown_hooks):
+            hook()
 
 
 def create_context(clock: Clock | None = None) -> ApplicationContext:
