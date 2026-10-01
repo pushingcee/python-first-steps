@@ -119,6 +119,13 @@ def test_visits_for_pet_are_stored_and_sorted_by_start(context, pet, carter, lea
     assert len(visits) == 3
 
 
+def test_changes_are_not_stored_until_saved(context, pet, carter):
+    visit = context.visit_service.book_visit(pet.id, "checkup")
+    visit.description = "Changed"
+
+    assert context.visit_service.visits_for_pet(pet.id)[0].description == "checkup"
+
+
 def test_visits_for_unknown_pet(context):
     with pytest.raises(NotFoundError):
         context.visit_service.visits_for_pet(42)

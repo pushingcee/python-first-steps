@@ -21,6 +21,10 @@ uv run pytest tests/test_01_specialty.py -v
 Each stub's docstring states the rules. The tests have the exact expectations, including output
 strings. Read the test file before you start.
 
+Each task's **Concepts** line is what it's there to teach. Green tests are half of done; the
+other half is using those concepts. Before the PR, run `/review-task NN` in Claude Code (or ask
+your agent for a pre-PR review) to check both.
+
 ## 00 Doctors (worked example, already done)
 
 Read every layer of it before starting task 01. Things to notice: the repository hands out
