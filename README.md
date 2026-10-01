@@ -1,5 +1,7 @@
 # PetClinic (Python CLI edition)
 
+**New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md).**
+
 [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) rebuilt in Python, as a
 learning project. Same domain, same layering (resource → service → repository), Python syntax.
 Naming differences: Spring's `Vet` is `Doctor` here, and a pet is a patient.
