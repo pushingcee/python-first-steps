@@ -52,7 +52,13 @@ def run_command(parser: argparse.ArgumentParser, line: str) -> str:
 
 def main() -> int:
     context = create_context()
-    parser = build_parser(context.resources)
+    try:
+        return _repl(build_parser(context.resources))
+    finally:
+        context.close()
+
+
+def _repl(parser: argparse.ArgumentParser) -> int:
     print("PetClinic shell. Try `doctor --help`. `help` lists resources, `exit` quits.")
     while True:
         try:
